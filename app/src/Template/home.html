@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Twig Example</title>
+</head>
+<body>
+<h2>Buscador 2</h2>
+<div>
+
+    <form
+            method="GET"
+            style="width: 50%"
+    >
+        <input
+                style="width: 50%"
+                type="text" name="texto" placeholder="Bucar por texto...."/>
+        <input type="submit" value="Buscar">
+    </form>
+
+    <table style="width: 25%; margin: 20px">
+        <thead>
+        <tr>
+            <td>Dominio</td>
+            <td>Apariciones</td>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for domain in data %}
+        <tr>
+            <td>{{ domain.name }}</td>
+            <td>{{ domain.number }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>

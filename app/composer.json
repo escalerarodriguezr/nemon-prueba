@@ -1,0 +1,40 @@
+{
+    "name": "rescalera/simplex-web",
+    "description": "Simplex web",
+    "type": "project",
+    "license": "MIT",
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": {
+            "SimplexWeb\\": "src/",
+            "Framework\\": "framework/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Rafael de la Escalera"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require-dev": {
+        "phpunit/phpunit": "9.5.x-dev"
+    },
+    "require": {
+        "php": ">=8.0",
+        "symfony/dotenv": "6.0.*",
+        "symfony/http-foundation": "6.0.*",
+        "symfony/routing": "6.0.*",
+        "symfony/http-kernel": "6.0.*",
+        "symfony/event-dispatcher": "6.0.*",
+        "symfony/dependency-injection": "6.0.*",
+        "twig/twig": "3.x-dev",
+        "voku/simple_html_dom": "dev-master"
+    }
+}
