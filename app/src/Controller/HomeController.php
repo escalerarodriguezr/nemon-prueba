@@ -27,7 +27,7 @@ class HomeController
 
         if($filter === null){
             return new Response(
-                $this->twig->render('home.html', ["data" => null]),
+                $this->twig->render('home.html', ["data" => null, 'filter' => '']),
                 Response::HTTP_OK
             );
         }
@@ -35,7 +35,7 @@ class HomeController
         $data = $this->googleSearchService->search($filter);
 
         return new Response(
-        $this->twig->render('home.html', ["data"=>$data]),
+        $this->twig->render('home.html', ["data"=>$data, "filter" => $filter]),
         Response::HTTP_OK
     );
 
