@@ -32,6 +32,9 @@ $containerBuilder->register('event-subscriber.response_content_length', ContentL
 $containerBuilder->register('dispatcher', EventDispatcher::class)
     ->addMethodCall('addSubscriber', [new Reference('event-subscriber.response_content_length')]);
 
+$containerBuilder->register('php_session_bridge',PhpBridgeSessionStorage::class);
+$containerBuilder->register('session',Session::class)
+    ->setArguments([ new Reference('php_session_bridge')]);
 
 $containerBuilder->register('simplex', \Framework\Simplex::class)
     ->setArguments([
@@ -39,6 +42,7 @@ $containerBuilder->register('simplex', \Framework\Simplex::class)
         new Reference('matcher'),
         new Reference('controller_resolver'),
         new Reference('argument_resolver'),
+        new Reference('session')
     ]);
 
 $containerBuilder->register('twig_loader',FilesystemLoader::class)
@@ -46,12 +50,8 @@ $containerBuilder->register('twig_loader',FilesystemLoader::class)
 $containerBuilder->register('twig',Environment::class)
     ->setArguments([new Reference('twig_loader'), ['cache'=>false]]);
 
-$containerBuilder->register('php_session_bridge',PhpBridgeSessionStorage::class);
-$containerBuilder->register('session',Session::class)
-    ->setArguments([ new Reference('php_session_bridge')])
-    ->addMethodCall('start');
 
-//Services
+//Domain services
 $containerBuilder->register('google-search',GoogleSearchService::class);
 
 return $containerBuilder;

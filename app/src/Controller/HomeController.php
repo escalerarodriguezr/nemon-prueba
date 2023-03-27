@@ -6,6 +6,7 @@ namespace SimplexWeb\Controller;
 use SimplexWeb\Service\GoogleSearchService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Twig\Environment;
 class HomeController
 {
@@ -24,20 +25,25 @@ class HomeController
     {
 
         $filter = $request->get('texto');
+        $session = $request->getSession();
 
         if($filter === null){
+            $data = $session->get('domains', []);
             return new Response(
-                $this->twig->render('home.html', ["data" => null, 'filter' => '']),
+                $this->twig->render('home.html', ["data" => $data, 'filter' => '']),
                 Response::HTTP_OK
             );
         }
 
-        $data = $this->googleSearchService->search($filter);
+        //Servicio que procesa los resultados y los guarda en la session
+        $this->googleSearchService->search($filter);
+
+        $data = $session->get('domains');
 
         return new Response(
         $this->twig->render('home.html', ["data"=>$data, "filter" => $filter]),
         Response::HTTP_OK
-    );
+        );
 
     }
 

@@ -5,6 +5,8 @@ use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+session_start();
+
 define("ROOT_PATH", dirname(__DIR__));
 require ROOT_PATH. '/vendor/autoload.php';
 require ROOT_PATH. '/config/constants/framework.php';
